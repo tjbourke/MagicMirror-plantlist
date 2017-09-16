@@ -1,4 +1,4 @@
-Module.register("helloworld",{
+Module.register("plantlist",{
 	// Default module config.
 	defaults: {
 		text: "Hello World!"
