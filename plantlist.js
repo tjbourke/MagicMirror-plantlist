@@ -58,6 +58,8 @@ Module.register("plantlist",{
 		this.show(this.config.animationSpeed, {lockString:this.identifier});
 		//this.loaded = true;
 
+		Log.info('Plant name: ' + plants[0]['facility_name']);
+
 		this.config.plantName = plants[0]['facility_name'];
 
 		this.updateDom(this.config.animationSpeed);
