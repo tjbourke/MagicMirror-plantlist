@@ -61,7 +61,7 @@ Module.register("plantlist",{
 
 		//Log.info('Plant name: ' + plants[0]['facility_name']);
 
-		this.config.plantName = plants[0]['facility_name'];
+		this.config.plantName = plants[0]['facility_name'] !== undefined?plants[0]['facility_name']:'No plant found.';
 
 		this.updateDom(this.config.animationSpeed);
 		//this.sendNotification("CURRENTWEATHER_DATA", {data: data});
