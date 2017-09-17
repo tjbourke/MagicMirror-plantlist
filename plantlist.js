@@ -5,6 +5,9 @@ Module.register("plantlist",{
 
 		animationSpeed: 1000,
 
+		updateInterval: 3000,
+		initialLoadDelay: 0,
+
 		apiBase: 'https://plm.flexngate-mi.com/api/',
 		apiVersion: 'v1',
 		endPoint: 'plants'
@@ -12,13 +15,38 @@ Module.register("plantlist",{
 
 	start: function()
 	{
+		Log.info("Starting module: " + this.name);
+
+		this.scheduleUpdate(this.config.initialLoadDelay);
+	},
+
+	/* scheduleUpdate()
+	 * Schedule next update.
+	 *
+	 * argument delay number - Milliseconds before next update. If empty, this.config.updateInterval is used.
+	 */
+	scheduleUpdate: function(delay) {
+		var nextLoad = this.config.updateInterval;
+		if (typeof delay !== "undefined" && delay >= 0) {
+			nextLoad = delay;
+		}
+
+		var self = this;
+		setTimeout(function() {
+			self.updatePlants();
+		}, nextLoad);
+	},
+
+	updatePlants: function()
+	{
+
 		/*if (this.config.appid === "") {
 			Log.error("CurrentWeather: APPID not set!");
 			return;
 		}*/
 
 		var url = this.config.apiBase + this.config.apiVersion + "/" + this.config.endPoint;// + this.getParams();
-		//this.config.plantName = url;
+		this.config.plantName = url;
 		//var url = this.config.apiBase + this.config.apiVersion + "/" + this.config.weatherEndpoint + this.getParams();
 		var self = this;
 		var retry = true;
