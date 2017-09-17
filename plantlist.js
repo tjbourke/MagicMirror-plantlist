@@ -17,7 +17,7 @@ Module.register("plantlist",{
 			return;
 		}*/
 
-		var url = this.config.apiBase + this.config.apiVersion + "/" + this.config.endpoint;// + this.getParams();
+		var url = this.config.apiBase + this.config.apiVersion + "/" + this.config.endPoint;// + this.getParams();
 		this.config.plantName = url;
 		//var url = this.config.apiBase + this.config.apiVersion + "/" + this.config.weatherEndpoint + this.getParams();
 		var self = this;
