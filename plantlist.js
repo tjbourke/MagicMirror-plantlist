@@ -18,7 +18,7 @@ Module.register("plantlist",{
 		}*/
 
 		var url = this.config.apiBase + this.config.apiVersion + "/" + this.config.endPoint;// + this.getParams();
-		this.config.plantName = url;
+		//this.config.plantName = url;
 		//var url = this.config.apiBase + this.config.apiVersion + "/" + this.config.weatherEndpoint + this.getParams();
 		var self = this;
 		var retry = true;
@@ -61,7 +61,7 @@ Module.register("plantlist",{
 
 		//Log.info('Plant name: ' + plants[0]['facility_name']);
 
-		//this.config.plantName = plants[0]['facility_name'];
+		this.config.plantName = plants[0]['facility_name'];
 
 		this.updateDom(this.config.animationSpeed);
 		//this.sendNotification("CURRENTWEATHER_DATA", {data: data});
