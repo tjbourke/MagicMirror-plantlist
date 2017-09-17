@@ -5,7 +5,7 @@ Module.register("plantlist",{
 
 		animationSpeed: 1000,
 
-		apiBase: 'http://192.168.1.113/api/',
+		apiBase: 'https://plm.flexngate-mi.com/api/',
 		apiVersion: 'v1',
 		endPoint: 'plants'
 	},
