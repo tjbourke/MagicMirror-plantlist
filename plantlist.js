@@ -1,11 +1,11 @@
 Module.register("plantlist",{
 	// Default module config.
 	defaults: {
-		text: "Hello World!",
+		plantName: "Default Plant Name!",
 
 		animationSpeed: 1000,
 
-		updateInterval: 3000,
+		updateInterval: 1000,
 		initialLoadDelay: 0,
 
 		apiBase: 'https://plm.flexngate-mi.com/api/',
@@ -15,8 +15,6 @@ Module.register("plantlist",{
 
 	start: function()
 	{
-		Log.info("Starting module: " + this.name);
-
 		this.scheduleUpdate(this.config.initialLoadDelay);
 	},
 
@@ -46,8 +44,6 @@ Module.register("plantlist",{
 		}*/
 
 		var url = this.config.apiBase + this.config.apiVersion + "/" + this.config.endPoint;// + this.getParams();
-		this.config.plantName = url;
-		//var url = this.config.apiBase + this.config.apiVersion + "/" + this.config.weatherEndpoint + this.getParams();
 		var self = this;
 		var retry = true;
 
@@ -70,6 +66,7 @@ Module.register("plantlist",{
 					//self.scheduleUpdate((self.loaded) ? -1 : self.config.retryDelay);
 				}
 			}
+			//self.scheduleUpdate();
 		};
 		request.send();
 	},
@@ -79,21 +76,23 @@ Module.register("plantlist",{
 		if (!data) { // || !data.main || typeof data.main.temp === "undefined") {
 			// Did not receive usable new data.
 			// Maybe this needs a better check?
-			return;
+			//return;
 		}
 
 		plants = data.data;
 
+		//this.config.plantName = data['weather'][0]['description'];
+		this.config.plantName = 'In processList';// plants[0]['facility_name'] !== undefined?plants[0]['facility_name']:'No plant found.';
+
 		this.show(this.config.animationSpeed, {lockString:this.identifier});
-		//this.loaded = true;
-
-		//Log.info('Plant name: ' + plants[0]['facility_name']);
-
-		this.config.plantName = plants[0]['facility_name'] !== undefined?plants[0]['facility_name']:'No plant found.';
-
 		this.updateDom(this.config.animationSpeed);
 		//this.sendNotification("CURRENTWEATHER_DATA", {data: data});
 	},
+
+	/*getScripts: function()
+	{
+		return ['moment.js'];
+	},*/
 
 	// Override dom generator.
 	getDom: function() {
